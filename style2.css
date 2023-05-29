@@ -1,0 +1,63 @@
+@font-face {
+    font-family: "Gotham Black";
+    src: url(https://www.fontmirror.com/app_public/files/t/1/GOTHAM-BLACK_3cbfe3a6e2f69550bc1cbfca3714ed88.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body, html{
+    background-color: #2e2d2d;
+}
+.container{
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    margin: auto;
+    height: 900px;
+    grid-template-areas: 
+    "logoma logoma logoma"
+    "texto texto texto "
+    "input input input "
+    "button button button";
+}
+#texto{
+    margin-top: 100px;
+    text-align: center;
+    font-family: "Gotham Black", sans-serif;
+    color: #FFFFFF;
+    font-size: 25px;
+    grid-area: texto;
+
+}
+#logoma{
+    width: 300px;
+    grid-area: logoma;
+    margin: auto;
+}
+input:focus{
+    outline: none;
+}
+input{
+    border: none;
+    width: 350px;
+    height: 48px;
+    border-radius: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 26.6112px #5086F2, 0px 0px 15.2064px #5086F2, 0px 0px 8.8704px #5086F2, 0px 0px 4.4352px #5086F2, 0px 0px 1.2672px #5086F2, 0px 0px 0.6336px #5086F2;
+    border-radius: 30px;
+    grid-area: input;
+    font-family: "Gotham Black";
+    font-size: 20px;
+    text-align: center;
+}
+button{
+    border: none;
+    width: 360px;
+    height: 64px;
+    background: #5086F2;
+    border-radius: 30px;
+    margin: auto;
+    grid-area: button;
+}
