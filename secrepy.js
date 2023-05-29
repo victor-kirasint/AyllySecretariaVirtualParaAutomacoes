@@ -14,7 +14,8 @@ function acionafuncao(){
     OnOff()
     setTimeout(DesligaLED, 20000)
     botaocont=0
-    document.getElementById("abrirporta2").style.display="none"
+    document.getElementById("porta").style.backgroundColor="#2e2d2d"
+    document.getElementById("porta").style.border="#2e2d2d"
     document.getElementById("abrirporta").style.display="block"
 
   }
