@@ -1,16 +1,16 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266WiFi.h>
-#include <ArduinoJson.h>
 #include <ESP8266HTTPClient.h>
-const char* ssid = "Irmandade";
-const char* password = "85979278";
+const char* ssid = "AyllySecretariaVirtual";
+const char* password = "19102006";
 ESP8266WebServer server(80);
 void handleRoot();
 void handleNotFound();
 const int led = 0;
-const int led2 = 15;
-const int pc = 14;
+const int led2 = 2;
+const int pc = 15;
+const int reset = 13; 
 
 void setup(void) {
 WiFi.begin(ssid, password);
@@ -20,17 +20,19 @@ server.on("/LEDOFF", HTTP_POST, handleLEDOFF);
 server.on("/LED2", HTTP_POST, handleLED2);
 server.on("/LED2OFF", HTTP_POST, handleLED2OFF);
 server.on("/PCON", HTTP_POST, handlePCON);
+server.on("/PCRESET", HTTP_POST, handleRESET);
 server.onNotFound(handleNotFound);
 
 Serial.begin(9600);
 
 server.begin();
 
+Serial.println(WiFi.localIP());
+
 pinMode(led, OUTPUT);
 pinMode(led2, OUTPUT);
 pinMode(pc, OUTPUT);
-
-digitalWrite(pc, HIGH);
+pinMode(reset, OUTPUT);
 
 }
 
@@ -65,11 +67,20 @@ void handlePCON(){
   digitalWrite(pc, HIGH);
   server.send(200);
 }
+void handleRESET(){
+  server.sendHeader("Location", "/");
+  digitalWrite(reset, LOW);
+  delay(1000);
+  digitalWrite(reset, HIGH);
+  server.send(200);
+}
 
 void handleNotFound(){
   server.send(404, "text/plain", "Erorr");
 }
 void loop(void) {
   server.handleClient();
+  
+  Serial.println(WiFi.localIP());
   // Send an HTTP POST request depending on timerDelay
 }
