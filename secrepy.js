@@ -1,12 +1,13 @@
 botaocont = 0
+luzcont = 0
 function OnOff() {
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("POST", "http://192.168.0.165/LED");
+  xmlhttp.open("POST", "http://10.0.0.100/LED");
   xmlhttp.send();
 }
 function DesligaLED() {
   var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("POST", "http://192.168.0.165/LEDOFF");
+  xmlhttp.open("POST", "http://10.0.0.100/LEDOFF");
   xmlhttp.send();
 }
 function acionafuncao(){
@@ -14,16 +15,13 @@ function acionafuncao(){
     OnOff()
     setTimeout(DesligaLED, 20000)
     botaocont=0
-    document.getElementById("porta").style.backgroundColor="#2e2d2d"
-    document.getElementById("porta").style.border="#2e2d2d"
-    document.getElementById("abrirporta").style.display="block"
+    document.getElementById("portaa").style.backgroundColor="#4EF5CD"
 
   }
   else{
     DesligaLED()
     botaocont=1
-    document.getElementById('abrirporta').style.display="none";
-    document.getElementById('abrirporta2').style.display="block"
+    document.getElementById("portaa").style.background="#E84195"
   }
 
 }
@@ -47,7 +45,7 @@ function programar2(){
   const tempoEmMilissegundos = (horas * 3600 + minutos * 60 + segundos) * 1000;
   // Executando a primeira função
   // Executando a segunda função após o tempo definido
-  setTimeout(DesligaLED, tempoEmMilissegundos);
+  setTimeout(OnOff, tempoEmMilissegundos);
   }
   const tempodelay = setTimeout(DesligaLED, tempoEmMilissegundos);
 
@@ -59,11 +57,54 @@ function programarhorario(){
   }
   else{
     DesligaLED();
-    clearTimeout(tempodelay)
+    clearTimeout()
     botaocont = 1
   }
+}  
+function mudacor1(){
+  document.getElementById("pc").style.background="#4F83F8"
+}
+function mudacor2(){
+  document.getElementById("reset").style.background="#4F83F8"
+}
+function pc() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "http://10.0.0.100/PCON");
+  xmlhttp.send();
+  document.getElementById("pc").style.background="#4EF5CD"
+  setTimeout(mudacor1, 2000)
   
 }
+function reset() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "http://10.0.0.100/PCRESET");
+  xmlhttp.send();
+  document.getElementById("reset").style.background="#4EF5CD"
+  setTimeout(mudacor2, 2000)
+}
+function luz() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "http://10.0.0.100/LED2");
+  xmlhttp.send();
+  document.getElementById("luz").style.backgroundColor="#4EF5CD"
+}
+function luzoff() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST", "http://10.0.0.100/LED2OFF");
+  xmlhttp.send();
+  document.getElementById("luz").style.background="#E84195"
+}
+function acionaluz(){
+  if (luzcont == 0){
+    luz()
+    luzcont = 1
+  }
+  else{
+    luzoff()
+    luzcont = 0
+  }
+}
+
 
 
 
